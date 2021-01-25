@@ -31,7 +31,7 @@ def load_requirements():
 
 
 setup(
-    name='magic-admin',
+    name='django-magic-fortmatic',
     version=read_version(),
     description='Magic Python Library',
     long_description=load_readme(),
