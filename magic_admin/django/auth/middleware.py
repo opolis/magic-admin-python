@@ -11,12 +11,6 @@ from magic_admin.django.config import (
 from magic_admin.django.exceptions import UnableToLoadUserFromIdentityToken
 from magic_admin.error import (
     DIDTokenError,
-    APIConnectionError,
-    RateLimitingError,
-    BadRequestError,
-    AuthenticationError,
-    ForbiddenError,
-    APIError,
 )
 from magic_admin.utils.http import get_identity_token_from_header
 from magic_admin.magic import Magic
@@ -93,15 +87,8 @@ class MagicAuthMiddleware(MiddlewareMixin):
             Magic().Token.validate(identity_token)
         except (
                 DIDTokenError,
-                APIConnectionError,
-                RateLimitingError,
-                BadRequestError,
-                AuthenticationError,
-                ForbiddenError,
-                APIError,
         ) as e:
             logout(request)
-            raise e
             return
 
         if request.user.is_anonymous:

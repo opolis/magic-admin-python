@@ -11,12 +11,6 @@ from magic_admin.django.exceptions import (
 )
 from magic_admin.error import (
     DIDTokenError,
-    APIConnectionError,
-    RateLimitingError,
-    BadRequestError,
-    AuthenticationError,
-    ForbiddenError,
-    APIError,
 )
 
 from magic_admin.utils.http import get_identity_token_from_header
@@ -50,18 +44,11 @@ class MagicAuthBackend(ModelBackend):
             Magic().Token.validate(identity_token)
         except (
                 DIDTokenError,
-                APIConnectionError,
-                RateLimitingError,
-                BadRequestError,
-                AuthenticationError,
-                ForbiddenError,
-                APIError,
         ) as e:
             log_debug(
                 'DID Token failed validation. No user is to be retrieved.',
                 error_class=e.__class__.__name__,
             )
-            raise e
             return None
 
         try:
