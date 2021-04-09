@@ -24,6 +24,17 @@ from magic_admin.utils.logging import (
 user_model = get_user_model()
 
 
+def _lower_case(value):
+    if isinstance(value, str):
+        return value.lower()
+    else:
+        return False
+
+
+def _match_email(user, email):
+    return _lower_case(user.email) == _lower_case(email)
+
+
 class MagicAuthBackend(ModelBackend):
 
     @staticmethod
@@ -56,7 +67,7 @@ class MagicAuthBackend(ModelBackend):
         except user_model.DoesNotExist:
             raise PublicAddressDoesNotExist()
 
-        if user.email != email:
+        if not _match_email(user, email):
             raise UserEmailMissmatch()
 
         return user

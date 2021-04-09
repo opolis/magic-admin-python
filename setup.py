@@ -55,7 +55,7 @@ setup(
     install_requires=load_requirements(),
     python_requires='>=3.6',
     project_urls={
-        'Website': 'https://magic.link',
+        'Website': 'https://github.com/voith/magic-admin-python',
     },
     classifiers=[
         'Development Status :: 3 - Alpha',
